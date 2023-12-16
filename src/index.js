@@ -36,3 +36,15 @@ function makeThumbnail(pokemon){
 
 fetchPokemon();
 
+
+// function createToyCard(toy){
+//     let card = document.createElement('div') //this adds a toy card as a listed item, but doesn't actually attach it to the div yet
+//     card.className = 'toy-card'
+//     card.innerHTML = `
+//   <div class="card">
+//     <h2>${toy.name}</h2>
+//     <img src="${toy.image}" class="toy-avatar" />
+//     <p>${toy.likes} Likes</p>
+//     <button class="like-btn" id=${toy.id}>Like ❤️</button>
+//   </div>
+//   `;}
