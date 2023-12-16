@@ -52,9 +52,10 @@ function seeMore(id){
 
 function mainCard(id){
     pokeDetails.innerHTML = `
-  <div class="card" id="pokemon-details>
+  <div class="card" id="pokemon-details">
     <h2>${id.name}</h2>
-    <img src="${id.sprites.other['official-artwork'].front_default}" class="full-image" />
+    <img src="${id.sprites.other['official-artwork'].front_default}"
+    class="full-image" />
     <p>Weight: ${id.weight / 10} kilogram(s)</p>
     <p>Height: ${id.height / 10} meter(s)</p>
     
