@@ -22,6 +22,7 @@ const fetchPokemon = () => {
 };
 
 const pokeBar = document.querySelector('#pokemon-bar');
+const pokeDetails = document.querySelector('#pokemon-details')
 
 function pokeThumbnails(pokemon){
     pokemon.forEach(monster => {
@@ -37,9 +38,29 @@ function pokeThumbnails(pokemon){
 pokeBar.addEventListener('click', function(e) {
     if(e.target.className === 'pokemon-thumbnail'){
         const pokemonID = e.target.dataset.id;
-        console.log(pokemonID)
-    }
+        pokeDetails.innerHTML = '';
+        seeMore(pokemonID);
+    };
 })
+
+function seeMore(id){
+    fetch(urlBar+`${id}`)
+    .then(res => res.json())
+    .then(data => mainCard(data))
+    .catch(error => console.error(error))
+    }
+
+function mainCard(id){
+    pokeDetails.innerHTML = `
+  <div class="card" id="pokemon-details>
+    <h2>${id.name}</h2>
+    <img src="${id.sprites.other['official-artwork'].front_default}" class="full-image" />
+    <p>Weight: ${id.weight / 10} kilogram(s)</p>
+    <p>Height: ${id.height / 10} meter(s)</p>
+    
+  </div>
+  `;
+}
 
 fetchPokemon();
 

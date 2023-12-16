@@ -29,3 +29,7 @@ header {
     margin-right: 0.5rem;
     cursor: pointer;
 }
+
+.full-image img {
+    height: 350px;
+}
