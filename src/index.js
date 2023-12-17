@@ -81,7 +81,7 @@ function mainCard(id){
                 shinyPoke="${id.sprites.other['official-artwork'].front_shiny}" />
             <p>Height: ${id.height / 10} meter(s) | Weight: ${id.weight / 10} kilogram(s)</p>
             <p></p>    
-            <p class ="type-${id.types[0].type.name}">Type(s): ${pokeType[0].toUpperCase()+pokeType.substring(1)}</p>  
+            <p class ="type-${id.types[0].type.name}">Type(s): ${pokeType}</p>  
         </div>
     `;
 }
