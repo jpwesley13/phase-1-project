@@ -3,6 +3,7 @@ const urlBar = 'https://pokeapi.co/api/v2/pokemon/'
 const pokeBar = document.querySelector('#pokemon-bar');
 const pokeDetails = document.querySelector('#pokemon-details')
 const pokeImage = document.querySelector('#pokemon-image')
+const dexForm = document.querySelector('#dex-search')
 function randomPokemon(gen1, gen9){
     return Math.floor(Math.random() * (gen9 - gen1 + 1) + gen1)
 };
@@ -26,10 +27,26 @@ const fetchPokemon = () => {
     };
 };
 
+const searchPokemon = (dexNumber) => {
+    const soughtPokemon = [];
+    const apiUrl = urlBar + dexNumber;
+  console.log(apiUrl);
+    
+    fetch(apiUrl)
+    .then(res => res.json())
+    .then(data => {
+        soughtPokemon.push(data);
+        pokeThumbnails(soughtPokemon)
+    })
+}
+
 function seeMore(id){
     fetch(urlBar+`${id}`)
     .then(res => res.json())
-    .then(data => mainCard(data))
+    .then(data => {
+        mainCard(data)
+        console.log(data)
+        console.log(mainCard(data))})
     .catch(error => console.error(error))
     };
 
@@ -54,7 +71,7 @@ function mainCard(id){
   <div class="card" id="pokemon-details">
     <h2>${id.name}</h2>
     <img src="${id.sprites.other['official-artwork'].front_default}"
-    class="full-image" id="pokemon-image"/>
+    class="full-image" id="491"/>
     <p>Weight: ${id.weight / 10} kilogram(s)</p>
     <p>Height: ${id.height / 10} meter(s)</p>
     
@@ -78,9 +95,20 @@ document.addEventListener('keydown', function(e) {
     };
 });
 
+dexForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const pokedexNumber = document.getElementById('pokedex-number').value;
+    searchPokemon(pokedexNumber);
+    dexForm.reset()
+})
+
+
+
+//Work in Progress version
 pokeDetails.addEventListener('click', function(e){
+    console.log(e.target)
     if(e.target.tagName === 'IMG') {
-        const baseUrl = pokeImage.src;
+        const baseUrl = e.target.src;
         const shinyUrl = e.target.shinyPoke;
 
         if(baseUrl === shinyUrl){
@@ -90,5 +118,34 @@ pokeDetails.addEventListener('click', function(e){
         }
     }
 })
+
+// Functional pokeBar version version
+pokeBar.addEventListener('click', function(e){
+    console.log(e.target)
+    if(e.target.tagName === 'IMG') {
+        const baseUrl = e.target.src;
+        const shinyUrl = e.target.shinyPoke;
+
+        if(baseUrl === shinyUrl){
+            e.target.src = e.target.defaultPoke
+        } else {
+            e.target.src = shinyUrl
+        }
+    }
+})
+
+//Static URL functioning version
+// pokeDetails.addEventListener('click', function(e){
+//     if(e.target.tagName === 'IMG') {
+//         const baseUrl = e.target.src;
+//         const shinyUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/1008.png";
+
+//         if(baseUrl === shinyUrl){
+//             e.target.src = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1008.png"
+//         } else {
+//             e.target.src = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/1008.png"
+//         }
+//     }
+// })
 
 fetchPokemon();
