@@ -66,20 +66,24 @@ function pokeThumbnails(pokemon) {
   }
 
 function mainCard(id){
-    const pokeType = id.types.map(pokemon => pokemon.type.name).join(' / ');
+    const pokeType = id.types.map(pokemon => properNoun(pokemon.type.name)).join(' / ');
 
     pokeDetails.innerHTML = `
         <div class="card" id="pokemon-details">
-            <h2>${id.name}</h2>
+            <h2>${id.name.split("-").map(word => properNoun(word)).join(" ")}</h2>
             <img src="${id.sprites.other['official-artwork'].front_default}"
                 class="full-image" id="pokemon-image"
                 defaultPoke="${id.sprites.other['official-artwork'].front_default}"
                 shinyPoke="${id.sprites.other['official-artwork'].front_shiny}" />
             <p>Weight: ${id.weight / 10} kilogram(s)</p>
             <p>Height: ${id.height / 10} meter(s)</p>    
-            <p class ="type-${id.types[0].type.name}">Type(s): ${pokeType}</p>  
+            <p class ="type-${id.types[0].type.name}">Type(s): ${pokeType[0].toUpperCase()+pokeType.substring(1)}</p>  
         </div>
     `;
+
+    function properNoun(string) {
+        return string.charAt(0).toUpperCase()+string.slice(1);
+    }
 }
 
 //                                      Event Listeners
