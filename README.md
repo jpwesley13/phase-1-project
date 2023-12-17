@@ -31,4 +31,4 @@ After a Pokémon's card has been generated, the user is informed that they may m
 
 ## Sources
 
-All Pokémon data featured and rendered in Pokémon Roulette is fetched from the public API [PokeAPI](pokeapi.co).
+All Pokémon data featured and rendered in Pokémon Roulette is fetched from the public API [PokeAPI](https://pokeapi.co).
