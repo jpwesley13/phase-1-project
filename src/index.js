@@ -74,13 +74,13 @@ function mainCard(id){
 
     pokeDetails.innerHTML = `
         <div class="card" id="pokemon-details">
-            <h2>${id.name.split("-").map(word => properNoun(word)).join(" ")}</h2>
+            <h2 class ="type-${id.types[0].type.name}">${id.name.split("-").map(word => properNoun(word)).join(" ")}</h2>
             <img src="${id.sprites.other['official-artwork'].front_default}"
                 class="full-image" id="pokemon-image"
                 defaultPoke="${id.sprites.other['official-artwork'].front_default}"
                 shinyPoke="${id.sprites.other['official-artwork'].front_shiny}" />
-            <p>Weight: ${id.weight / 10} kilogram(s)</p>
-            <p>Height: ${id.height / 10} meter(s)</p>    
+            <p>Height: ${id.height / 10} meter(s) | Weight: ${id.weight / 10} kilogram(s)</p>
+            <p></p>    
             <p class ="type-${id.types[0].type.name}">Type(s): ${pokeType[0].toUpperCase()+pokeType.substring(1)}</p>  
         </div>
     `;
@@ -111,6 +111,7 @@ dexForm.addEventListener('submit', (e) => {
 
 pokeDetails.addEventListener('mouseover', (e) => {
     if (e.target.tagName === 'IMG') {
+        console.log(e.target)
         const shinyUrl = e.target.getAttribute('shinyPoke');
 
         if (shinyUrl && shinyUrl !== "null") { //catch the Kitakami Pokemon that don't have updated Shiny urls yet
