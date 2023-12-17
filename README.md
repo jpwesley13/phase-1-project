@@ -4,7 +4,7 @@ Pokémon Roulette is an application which displays a variety of information for 
 
 ## Initialization
 
-When Pokémon Roulette is loaded, 5 randomly selected Pokémon from the pokeapi.co API will be displayed as thumbnails. Users will be shown these Pokémon as well as be given basic instructions on how to use the app's features.
+When Pokémon Roulette is loaded, 5 randomly selected Pokémon will be displayed as thumbnails. Users will be shown these Pokémon as well as be given basic instructions on how to use the app's features.
 
 ## Features
 
@@ -28,3 +28,7 @@ When a user clicks on a Pokémon's thumbnail a card is generated that displays t
 ## Shiny Form
 
 After a Pokémon's card has been generated, the user is informed that they may mouse over the Pokémon to see its Shiny Form. The Shiny Form is an alternate coloration that all Pokémon have, and the user may see what this form looks like by hovering their mouse over the Pokémon's image. Upon mousing out of the image, the Pokémon will return to its default coloration. Recently, new Pokémon from the Kitakami region have been discovered, whose Shiny Forms have not yet been seen. When these Kitakami Pokémon are moused over, the user is presented with an alert that the alternate colors have no yet been discovered.
+
+## Sources
+
+All Pokémon data featured and rendered in Pokémon Roulette is fetched from the public API [PokeAPI](pokeapi.co).
