@@ -12,7 +12,7 @@ function properNoun(string) {
 
 //                                      Data Fetches
 const fetchPokemon = () => {
-    const pokemonArray = []; //create empty array to hold data so forEach can be applied properly.
+    const pokemonArray = [];
 
     for (let i = 0; i < 5; i++) {
         let pokeDex = randomPokemon(1, 1017);
@@ -21,7 +21,7 @@ const fetchPokemon = () => {
     .then(res => res.json())
     .then(data => {
         pokemonArray.push(data);
-        if(pokemonArray.length === 5){ //once all 5 Pokemon have been added to the array, then their thumbnails can be made
+        if(pokemonArray.length === 5){
         pokeThumbnails(pokemonArray)
         }
     })
@@ -115,7 +115,7 @@ pokeDetails.addEventListener('mouseover', (e) => {
     if (e.target.tagName === 'IMG') {
         const shinyUrl = e.target.getAttribute('shinyPoke');
 
-        if (shinyUrl && shinyUrl !== "null") { //catch the Kitakami Pokemon that don't have updated Shiny urls yet
+        if (shinyUrl && shinyUrl !== "null") {
             e.target.src = shinyUrl;
         } else {
             alert("Shiny form has not been discovered yet!");
