@@ -39,7 +39,8 @@ const searchPokemon = (dexNumber) => {
         soughtPokemon.push(data);
         pokeThumbnails(soughtPokemon)
     })
-}
+    .catch(error => console.error(error))
+};
 
 function seeMore(id){
     fetch(urlBar+`${id}`)
