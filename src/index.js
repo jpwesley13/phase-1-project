@@ -32,7 +32,6 @@ const fetchPokemon = () => {
 const searchPokemon = (dexNumber) => {
     const soughtPokemon = [];
     const apiUrl = urlBar + dexNumber;
-  console.log(apiUrl);
     
     fetch(apiUrl)
     .then(res => res.json())
@@ -47,8 +46,7 @@ function seeMore(id){
     .then(res => res.json())
     .then(data => {
         mainCard(data)
-        console.log(data)
-        console.log(mainCard(data))})
+        })
     .catch(error => console.error(error))
     };
 
@@ -63,7 +61,7 @@ function pokeThumbnails(pokemon) {
       pokePic.defaultPoke = monster.sprites.other['official-artwork'].front_default;
       pokePic.shinyPoke = monster.sprites.other['official-artwork'].front_shiny;
       pokePic.src = pokePic.defaultPoke;
-      pokePic.title = monster.name.split("-").map(word => properNoun(word)).join(" ");
+      pokePic.title = `#${monster.id} | ${monster.name.split("-").map(word => properNoun(word)).join(" ")}`;
   
       pokeBar.appendChild(pokePic);
     });
@@ -79,6 +77,7 @@ function mainCard(id){
                 class="full-image" id="pokemon-image"
                 defaultPoke="${id.sprites.other['official-artwork'].front_default}"
                 shinyPoke="${id.sprites.other['official-artwork'].front_shiny}" />
+            <h4 class ="hover">Mouse over to see Shiny Form</h4>
             <p>Height: ${id.height / 10} meter(s) | Weight: ${id.weight / 10} kilogram(s)</p>
             <p></p>    
             <p class ="type-${id.types[0].type.name}">Type(s): ${pokeType}</p>  
@@ -111,7 +110,6 @@ dexForm.addEventListener('submit', (e) => {
 
 pokeDetails.addEventListener('mouseover', (e) => {
     if (e.target.tagName === 'IMG') {
-        console.log(e.target)
         const shinyUrl = e.target.getAttribute('shinyPoke');
 
         if (shinyUrl && shinyUrl !== "null") { //catch the Kitakami Pokemon that don't have updated Shiny urls yet
