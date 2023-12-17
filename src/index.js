@@ -105,7 +105,9 @@ document.addEventListener('keydown', (e) => {
 dexForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const pokedexNumber = document.getElementById('pokedex-number').value;
+    if(!isNaN(pokedexNumber)){
     searchPokemon(pokedexNumber);
+    };
     dexForm.reset()
 })
 
