@@ -7,12 +7,17 @@
     </head>
     <body>
         <header>
-            <h3>Pokémon Roulette</h3>
+            <h2>Pokémon Roulette</h2>
+            <h4>Press the 'r' key to reroll selection</h4>
         </header>
-        <form id="dex-search">
-            <input type="text" id="pokedex-number" placeholder="Enter PokeDex Number">
-            <button type="submit">Search</button>
-          </form>
+        <div class ="instructions">
+            <h4 class ="instructions" id="search-instructions">Enter PokeDex Number to add to current selection</h4>
+            <form id="dex-search">
+                <input type="text" id="pokedex-number" placeholder="PokeDex Number">
+                <button type="submit">Search</button>
+              </form>
+        </div>
+        
 
         <div id="pokemon-bar">
 
