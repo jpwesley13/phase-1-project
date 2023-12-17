@@ -53,17 +53,17 @@ function seeMore(id){
 
 //                                      Data Displays
 function pokeThumbnails(pokemon) {
-  pokemon.forEach(monster => {
-    const pokePic = document.createElement('img');
-    pokePic.classList.add('pokemon-thumbnail');
-    pokePic.id = monster.id;
-    pokePic.defaultPoke = monster.sprites.other['official-artwork'].front_default;
-    pokePic.shinyPoke = monster.sprites.other['official-artwork'].front_shiny;
-    pokePic.src = pokePic.defaultPoke;
-
-    pokeBar.appendChild(pokePic);
-  });
-}
+    pokemon.forEach(monster => {
+      const pokePic = document.createElement('img');
+      pokePic.classList.add('pokemon-thumbnail');
+      pokePic.id = monster.id;
+      pokePic.defaultPoke = monster.sprites.other['official-artwork'].front_default;
+      pokePic.shinyPoke = monster.sprites.other['official-artwork'].front_shiny;
+      pokePic.src = pokePic.defaultPoke;
+  
+      pokeBar.appendChild(pokePic);
+    });
+  }
 
 function mainCard(id){
     const pokeType = id.types.map(pokemon => pokemon.type.name).join(' / ');
@@ -77,7 +77,7 @@ function mainCard(id){
                 shinyPoke="${id.sprites.other['official-artwork'].front_shiny}" />
             <p>Weight: ${id.weight / 10} kilogram(s)</p>
             <p>Height: ${id.height / 10} meter(s)</p>    
-            <p>Type(s): ${pokeType}</p>  
+            <p class ="type-${id.types[0].type.name}">Type(s): ${pokeType}</p>  
         </div>
     `;
 }
@@ -106,8 +106,14 @@ dexForm.addEventListener('submit', (e) => {
 })
 
 pokeDetails.addEventListener('mouseover', (e) => {
-    if(e.target.tagName === 'IMG') {
-        e.target.src = e.target.getAttribute('shinyPoke')
+    if (e.target.tagName === 'IMG') {
+        const shinyUrl = e.target.getAttribute('shinyPoke');
+
+        if (shinyUrl && shinyUrl !== "null") { //catch the Kitakami Pokemon that don't have updated Shiny urls yet
+            e.target.src = shinyUrl;
+        } else {
+            alert("Shiny form has not been discovered yet!");
+        }
     }
 });
 
