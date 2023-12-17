@@ -1,4 +1,4 @@
-//                                      Accessible Variables
+//                                      Global Access
 const urlBar = 'https://pokeapi.co/api/v2/pokemon/'
 const pokeBar = document.querySelector('#pokemon-bar');
 const pokeDetails = document.querySelector('#pokemon-details')
@@ -6,6 +6,9 @@ const dexForm = document.querySelector('#dex-search')
 function randomPokemon(gen1, gen9){
     return Math.floor(Math.random() * (gen9 - gen1 + 1) + gen1)
 };
+function properNoun(string) {
+    return string.charAt(0).toUpperCase()+string.slice(1);
+}
 
 //                                      Data Fetches
 const fetchPokemon = () => {
@@ -60,6 +63,7 @@ function pokeThumbnails(pokemon) {
       pokePic.defaultPoke = monster.sprites.other['official-artwork'].front_default;
       pokePic.shinyPoke = monster.sprites.other['official-artwork'].front_shiny;
       pokePic.src = pokePic.defaultPoke;
+      pokePic.title = monster.name.split("-").map(word => properNoun(word)).join(" ");
   
       pokeBar.appendChild(pokePic);
     });
@@ -80,10 +84,6 @@ function mainCard(id){
             <p class ="type-${id.types[0].type.name}">Type(s): ${pokeType[0].toUpperCase()+pokeType.substring(1)}</p>  
         </div>
     `;
-
-    function properNoun(string) {
-        return string.charAt(0).toUpperCase()+string.slice(1);
-    }
 }
 
 //                                      Event Listeners
