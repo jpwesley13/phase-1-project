@@ -1,8 +1,12 @@
+//                      Accessible Variables
 const urlBar = 'https://pokeapi.co/api/v2/pokemon/'
+const pokeBar = document.querySelector('#pokemon-bar');
+const pokeDetails = document.querySelector('#pokemon-details')
 function randomPokemon(gen1, gen9){
     return Math.floor(Math.random() * (gen9 - gen1 + 1) + gen1)
 };
 
+//                  Data Fetches
 const fetchPokemon = () => {
     const pokemonArray = []; //create empty array to hold data so forEach can be applied properly.
 
@@ -18,12 +22,19 @@ const fetchPokemon = () => {
         }
     })
     .catch(error => console.error(error))
-    }
+    };
 };
 
-const pokeBar = document.querySelector('#pokemon-bar');
-const pokeDetails = document.querySelector('#pokemon-details')
+function seeMore(id){
+    fetch(urlBar+`${id}`)
+    .then(res => res.json())
+    .then(data => mainCard(data))
+    .catch(error => console.error(error))
+    };
 
+
+
+//                  Data Displays
 function pokeThumbnails(pokemon){
     pokemon.forEach(monster => {
         const pokePic = document.createElement('img');
@@ -32,23 +43,8 @@ function pokeThumbnails(pokemon){
         pokePic.src = monster.sprites.other['official-artwork'].front_default;
 
         pokeBar.appendChild(pokePic);
-    })
-}
-
-pokeBar.addEventListener('click', function(e) {
-    if(e.target.className === 'pokemon-thumbnail'){
-        const pokemonID = e.target.dataset.id;
-        pokeDetails.innerHTML = '';
-        seeMore(pokemonID);
-    };
-})
-
-function seeMore(id){
-    fetch(urlBar+`${id}`)
-    .then(res => res.json())
-    .then(data => mainCard(data))
-    .catch(error => console.error(error))
-    }
+    });
+};
 
 function mainCard(id){
     pokeDetails.innerHTML = `
@@ -61,8 +57,22 @@ function mainCard(id){
     
   </div>
   `;
-}
+};
+
+//                  Event Listeners
+pokeBar.addEventListener('click', function(e) {
+    if(e.target.className === 'pokemon-thumbnail'){
+        const pokemonID = e.target.dataset.id;
+        pokeDetails.innerHTML = '';
+        seeMore(pokemonID);
+    };
+})
+
+document.addEventListener('keydown', function(e) {
+    if(e.key === 'r'){
+        pokeBar.innerHTML = '';
+        fetchPokemon();
+    };
+});
 
 fetchPokemon();
-
-
