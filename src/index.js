@@ -1,14 +1,13 @@
-//                      Accessible Variables
+//                                      Accessible Variables
 const urlBar = 'https://pokeapi.co/api/v2/pokemon/'
 const pokeBar = document.querySelector('#pokemon-bar');
 const pokeDetails = document.querySelector('#pokemon-details')
-const pokeImage = document.querySelector('#pokemon-image')
 const dexForm = document.querySelector('#dex-search')
 function randomPokemon(gen1, gen9){
     return Math.floor(Math.random() * (gen9 - gen1 + 1) + gen1)
 };
 
-//                  Data Fetches
+//                                      Data Fetches
 const fetchPokemon = () => {
     const pokemonArray = []; //create empty array to hold data so forEach can be applied properly.
 
@@ -52,7 +51,7 @@ function seeMore(id){
 
 
 
-//                  Data Displays
+//                                      Data Displays
 function pokeThumbnails(pokemon) {
   pokemon.forEach(monster => {
     const pokePic = document.createElement('img');
@@ -67,6 +66,8 @@ function pokeThumbnails(pokemon) {
 }
 
 function mainCard(id){
+    const pokeType = id.types.map(pokemon => pokemon.type.name).join(' / ');
+
     pokeDetails.innerHTML = `
         <div class="card" id="pokemon-details">
             <h2>${id.name}</h2>
@@ -75,13 +76,14 @@ function mainCard(id){
                 defaultPoke="${id.sprites.other['official-artwork'].front_default}"
                 shinyPoke="${id.sprites.other['official-artwork'].front_shiny}" />
             <p>Weight: ${id.weight / 10} kilogram(s)</p>
-            <p>Height: ${id.height / 10} meter(s)</p>      
+            <p>Height: ${id.height / 10} meter(s)</p>    
+            <p>Type(s): ${pokeType}</p>  
         </div>
     `;
 }
 
-//                  Event Listeners
-pokeBar.addEventListener('click', function(e) {
+//                                      Event Listeners
+pokeBar.addEventListener('click', (e) => {
     if(e.target.className === 'pokemon-thumbnail'){
         const pokemonID = e.target.id;
         pokeDetails.innerHTML = '';
@@ -89,7 +91,7 @@ pokeBar.addEventListener('click', function(e) {
     };
 })
 
-document.addEventListener('keydown', function(e) {
+document.addEventListener('keydown', (e) => {
     if(e.key === 'r'){
         pokeBar.innerHTML = '';
         fetchPokemon();
@@ -103,10 +105,7 @@ dexForm.addEventListener('submit', (e) => {
     dexForm.reset()
 })
 
-
-
-//Work in Progress version
-pokeDetails.addEventListener('click', function(e){
+pokeDetails.addEventListener('mouseover', (e) => {
     if(e.target.tagName === 'IMG') {
         const baseUrl = e.target.src;
         const shinyUrl = e.target.getAttribute('shinyPoke');
@@ -118,5 +117,18 @@ pokeDetails.addEventListener('click', function(e){
         }
     }
 });
+
+pokeDetails.addEventListener('mouseout', (e) => {
+    if(e.target.tagName === 'IMG') {
+    const shinyUrl = e.target.src;
+    const defaultUrl = e.target.getAttribute('defaultPoke');
+    
+    if(shinyUrl === defaultUrl){
+        e.target.src = e.target.getAttribute('shinyPoke');
+    } else {
+        e.target.src = defaultUrl;
+    }
+    }
+    });
 
 fetchPokemon();

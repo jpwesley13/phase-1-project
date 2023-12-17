@@ -28,3 +28,5 @@ pokeBar.addEventListener('click', function(e){
         }
     }
 })
+
+//To do list: Make Pokemon names capitalized, change the style of weight and height, maybe add "the ${x} Pokemon" as a subheader below the Pokemon's name.
