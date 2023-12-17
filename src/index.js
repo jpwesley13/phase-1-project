@@ -107,27 +107,13 @@ dexForm.addEventListener('submit', (e) => {
 
 pokeDetails.addEventListener('mouseover', (e) => {
     if(e.target.tagName === 'IMG') {
-        const baseUrl = e.target.src;
-        const shinyUrl = e.target.getAttribute('shinyPoke');
-
-        if(baseUrl === shinyUrl){
-            e.target.src = e.target.getAttribute('defaultPoke');
-        } else {
-            e.target.src = shinyUrl;
-        }
+        e.target.src = e.target.getAttribute('shinyPoke')
     }
 });
 
 pokeDetails.addEventListener('mouseout', (e) => {
     if(e.target.tagName === 'IMG') {
-    const shinyUrl = e.target.src;
-    const defaultUrl = e.target.getAttribute('defaultPoke');
-    
-    if(shinyUrl === defaultUrl){
-        e.target.src = e.target.getAttribute('shinyPoke');
-    } else {
-        e.target.src = defaultUrl;
-    }
+        e.target.src = e.target.getAttribute('defaultPoke')
     }
     });
 
