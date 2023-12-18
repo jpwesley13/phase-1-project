@@ -107,6 +107,8 @@ dexForm.addEventListener('submit', (e) => {
     const pokedexNumber = document.getElementById('pokedex-number').value;
     if(!isNaN(pokedexNumber)){
     searchPokemon(pokedexNumber);
+    } else {
+        alert("Please enter a number between 1 and 1017.")
     };
     dexForm.reset()
 })
